@@ -106,7 +106,7 @@ func (a *App) sendNotificationEmail(notification *PostNotification, user *model.
 		}
 	}
 
-	landingURL := a.GetSiteURL() + "/landing#/" + team.Name
+	landingURL := a.GetSiteURL() + "/pregao"
 
 	var bodyText, err = a.getNotificationEmailBody(user, post, channel, channelName, senderName, team.Name, landingURL, emailNotificationContentsType, useMilitaryTime, translateFunc, senderPhoto)
 	if err != nil {
@@ -215,7 +215,7 @@ func (a *App) getNotificationEmailBody(recipient *model.User, post *model.Post, 
 	data := a.Srv().EmailService.newEmailTemplateData(recipient.Locale)
 	data.Props["SiteURL"] = a.GetSiteURL()
 	if teamName != "select_team" {
-		data.Props["ButtonURL"] = landingURL + "/pl/" + post.Id
+		data.Props["ButtonURL"] = landingURL
 	} else {
 		data.Props["ButtonURL"] = landingURL
 	}

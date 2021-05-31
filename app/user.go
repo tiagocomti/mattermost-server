@@ -385,7 +385,7 @@ func (a *App) CreateOAuthUser(c *request.Context, service string, userData io.Re
 		}
 		return nil, model.NewAppError("CreateOAuthUser", "api.user.create_oauth_user.already_attached.app_error", map[string]interface{}{"Service": service, "Auth": userByEmail.AuthService}, "email="+user.Email+" authData="+*user.AuthData, http.StatusBadRequest)
 	}
-
+	
 	user.EmailVerified = true
 
 	ruser, err := a.CreateUser(c, user)
@@ -988,7 +988,6 @@ func (a *App) SetProfileImageFromFile(userID string, file io.Reader) *model.AppE
 		mlog.Warn("Error with updating last picture update", mlog.Err(err))
 	}
 	a.invalidateUserCacheAndPublish(userID)
-	a.onUserProfileChange(userID)
 
 	return nil
 }
@@ -1319,7 +1318,6 @@ func (a *App) UpdateUser(user *model.User, sendNotifications bool) (*model.User,
 	}
 
 	a.InvalidateCacheForUser(user.Id)
-	a.onUserProfileChange(user.Id)
 
 	return userUpdate.New, nil
 }
