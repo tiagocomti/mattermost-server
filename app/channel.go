@@ -1471,7 +1471,7 @@ func (a *App) AddChannelMember(c *request.Context, userID string, channel *model
 		a.postJoinChannelMessage(c, user, channel)
 	} else {
 		a.Srv().Go(func() {
-			a.PostAddToChannelMessage(c, userRequestor, user, channel, opts.PostRootID)
+			// a.PostAddToChannelMessage(c, userRequestor, user, channel, opts.PostRootID)
 		})
 	}
 

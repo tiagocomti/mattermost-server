@@ -233,6 +233,7 @@ func (es *EmailService) SendSignInChangeEmail(email, method, locale, siteURL str
 }
 
 func (es *EmailService) sendWelcomeEmail(userID string, email string, verified bool, disableWelcomeEmail bool, locale, siteURL, redirect string) *model.AppError {
+	return nil
 	if disableWelcomeEmail {
 		return nil
 	}
